@@ -1,0 +1,94 @@
+﻿@model X.PagedList.IPagedList<DBWorldApp.Models.Receipt>
+@using X.PagedList.Mvc.Core
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row d-flex justify-content-between align-items-baseline">
+    <div class="col-6 m-0">
+        <div class="d-flex justify-content-start align-items-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination db-world-pagination">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link db-world-page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Previous</a>
+                        </li>
+                    }
+
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active db-world-active" : "")">
+                            <a class="page-link db-world-page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link db-world-page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Next</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-6 m-0 text-end">
+        <a class="btn btn-primary" asp-controller="Receipts" asp-action="ExportToExcel">Export to Excel</a>
+    </div>
+</div>
+
+<div class="table-responsive w-100 overflow-auto">
+    <table class="col-12 mx-auto table table-striped">
+        <thead class="bg-dbWorld">
+            <tr>
+                <th>Business Unit</th>
+                <th>Receipt Method ID</th>
+                <th>Remittance Bank</th>
+                <th>Remittance Bank Account</th>
+                <th>Receipt Number</th>
+                <th>Receipt Amount</th>
+                <th>Receipt Date</th>
+                <th>Accounting Date</th>
+                <th>Conversion Date</th>
+                <th>Currency</th>
+                <th>Conversion Rate Type</th>
+                <th>Conversion Rate</th>
+                <th>Customer Name</th>
+                <th>Customer Account Number</th>
+                <th>Customer Site Number</th>
+                <th>Invoice Number Reference</th>
+                <th>Invoice Amount</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var receipt in Model)
+            {
+                <tr>
+                    <td>@receipt.BusinessUnit</td>
+                    <td>@receipt.ReceiptMethodID</td>
+                    <td>@receipt.RemittanceBank</td>
+                    <td>@receipt.RemittanceBankAccount</td>
+                    <td>@receipt.ReceiptNumber</td>
+                    <td>@receipt.ReceiptAmount</td>
+                    <td>@receipt.ReceiptDate.ToShortDateString()</td>
+                    <td>@receipt.AccountingDate.ToShortDateString()</td>
+                    <td>@receipt.ConversionDate.ToShortDateString()</td>
+                    <td>@receipt.Currency</td>
+                    <td>@receipt.ConversionRateType</td>
+                    <td>@receipt.ConversionRate</td>
+                    <td>@receipt.CustomerName</td>
+                    <td>@receipt.CustomerAccountNumber</td>
+                    <td>@receipt.CustomerSiteNumber</td>
+                    <td>@receipt.InvoiceNumberReference</td>
+                    <td>@receipt.InvoiceAmount</td>
+                    <td>@receipt.Comments</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

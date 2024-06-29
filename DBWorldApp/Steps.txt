@@ -1,0 +1,18 @@
+Project Description:
+	Using .NET Design a web application that can read data from a CSV file then:
+	Display the content in a grid view.
+	Download the content in another format XLSX.
+
+Steps:
+
+The UI will be a table rendered in the receipts page as a table 
+and a button(export xlsx) to download excel sheet from the csv
+
+	1- Add New Folders Called: Services, Repositories, and Files.
+	2- Create Receipt.cs in Models contains all attributes in csv rows.
+	3- Create CsvService that has main method called ReadCsvFile using CsvHelper
+	4- Create ExcelService that has main method called DownloadXlsx using ClosedXML
+	5- Create IReceiptRepository interface that has getAllReceipts method
+	6- Create ReceiptRepository that implements IReceiptRepository
+	7- Create Controllers and Views to read all Receipts.csv rows from the Backend
+	8- Add Services and required builder configurations to program.cs to run the App
